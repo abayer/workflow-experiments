@@ -124,7 +124,7 @@ Map<String,String> findOptionalParams(Class<? extends Step> clazz) {
 String guessReturnType(StepDescriptor descr) {
     if (descr instanceof AbstractStepDescriptorImpl) {
         def executionType = descr.getExecutionType()
-        def method = executionType.declaredMethods.find { it.name == 'run' && it.parameterTypes.length <= 0 }
+        def method = executionType.declaredMethods.find { a -> a.name == 'run' && a.parameterTypes.length <= 0 }
         if (method != null) {
             return this.typeExpr(method.genericReturnType)
         }
