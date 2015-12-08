@@ -186,10 +186,15 @@ void generateSteps(Collection<? extends StepDescriptor> stepDescriptors, List<St
 @NonCPS
 void generateVars(Iterable<GlobalVariable> vars, List<String> scriptContext, List<String> nodeContext) {
     for(GlobalVariable variable : vars) {
-        Object value = variable.getValue(this)
-        if (value != null) {
-            String contr = "property(name: '${variable.name}', type: '${value.getClass().canonicalName}')"
-            scriptContext.add(contr)
+        try {
+            Object value = variable.getValue(this)
+            if (value != null) {
+                String contr = "property(name: '${variable.name}', type: '${value.getClass().canonicalName}')"
+                scriptContext.add(contr)
+            }
+        } catch (Exception e) {
+            println "Error on ${variable} of ${variable.class.toString()}:"
+            e.printStackTrace()
         }
     }
 }
