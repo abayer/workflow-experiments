@@ -45,6 +45,7 @@ import org.kohsuke.stapler.DataBoundSetter
 
 import java.lang.reflect.Constructor
 import java.lang.reflect.Type
+import static org.apache.commons.lang.exception.ExceptionUtils.getFullStackTrace
 
 @NonCPS
 String typeExpr(Type type, boolean describablesAsMaps = false) {
@@ -194,7 +195,7 @@ void generateVars(Iterable<GlobalVariable> vars, List<String> scriptContext, Lis
             }
         } catch (Exception e) {
             println "Error on ${variable} of ${variable.class.toString()}:"
-            e.printStackTrace()
+            println getFullStackTrace(e)
         }
     }
 }
