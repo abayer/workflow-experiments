@@ -6,4 +6,5 @@ node('master') {
     }
 
     sh "ls"
+    echo "I AM DOING SOMETHING DIFFERENT"
 }
